@@ -271,6 +271,12 @@ const StarField = () => {
 };
 
 // --- Icons ---
+/**
+ * Icon component mapping names to emojis.
+ * IMPORTANT: This logic is mirrored and unit tested in src/components/Icon.js.
+ * Ensure any changes here are also reflected in src/components/Icon.js
+ * to keep tests in sync with the production code.
+ */
 const Icon = ({ name, className }) => {
     const map = {
         Galaxy: "🌌",
