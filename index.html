@@ -35,6 +35,9 @@
     <!-- Marked (Markdown → HTML) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+    <!-- DOMPurify (Sanitize HTML) -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Quicksand:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap');
 
@@ -387,9 +390,13 @@ const Oracle = () => {
                         <div
                             className="math-scroll"
                             dangerouslySetInnerHTML={{
-                                __html: window.marked
-                                    ? window.marked.parse(m.text)
-                                    : m.text
+                                __html: window.DOMPurify
+                                    ? window.DOMPurify.sanitize(
+                                          window.marked
+                                              ? window.marked.parse(m.text)
+                                              : m.text
+                                      )
+                                    : (window.marked ? window.marked.parse(m.text) : m.text)
                             }}
                         />
                     </div>
