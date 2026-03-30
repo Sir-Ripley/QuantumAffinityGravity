@@ -35,6 +35,9 @@
     <!-- Marked (Markdown → HTML) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+    <!-- DOMPurify (HTML Sanitization) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Quicksand:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap');
 
@@ -384,14 +387,18 @@ const Oracle = () => {
                         <div className="font-bold text-[10px] uppercase mb-2 opacity-50">
                             {m.role === "user" ? "Guest" : "Aetheria"}
                         </div>
-                        <div
-                            className="math-scroll"
-                            dangerouslySetInnerHTML={{
-                                __html: window.marked
-                                    ? window.marked.parse(m.text)
-                                    : m.text
-                            }}
-                        />
+                        {window.DOMPurify && window.marked ? (
+                            <div
+                                className="math-scroll"
+                                dangerouslySetInnerHTML={{
+                                    __html: window.DOMPurify.sanitize(window.marked.parse(m.text))
+                                }}
+                            />
+                        ) : (
+                            <div className="math-scroll whitespace-pre-wrap">
+                                {m.text}
+                            </div>
+                        )}
                     </div>
                 ))}
                 {loading && (
