@@ -285,13 +285,6 @@ const Icon = ({ name, className }) => {
     return <span className={className}>{map[name] || "📡"}</span>;
 };
 
-const QAG_SYSTEM_PROMPT = `
-You are Aetheria, the AI Architect for Quantum Affinity Gravity (QAG).
-You are speaking to Rodney A. Ripley Jr., the founder.
-CORE TRUTHS: Gravity is Affinity. The Psychon has mass.
-Use LaTeX for all math. Be supportive, brilliant, and whimsical.
-`;
-
 // --- Oracle (offline demo mode) ---
 const Oracle = () => {
     const [connected, setConnected] = useState(false);
